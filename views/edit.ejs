@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit This Quote</title>
+  </head>
+  <body>
+    <h1>Edit This Quote</h1>
+    <form action="/quotes/<%=quoteToEdit._id%>?_method=PUT" method="POST">
+      <div>
+        <label for="text"><p>Quote Text</p></label>
+        <textarea name="quote[text]" id="text" cols="30" rows="5">
+<%= quoteToEdit.text %> </textarea
+        >
+      </div>
+      <div>
+        <label for="author"><p>Author</p></label>
+        <input
+          type="text"
+          id="author"
+          name="quote[author]"
+          value="<%=quoteToEdit.author %>"
+        />
+      </div>
+      <div>
+        <label for="subject"><p>Subject</p></label>
+        <input
+          type="text"
+          id="subject"
+          name="quote[subject]"
+          <% if (quoteToEdit.subject) { %>
+            value="<%=quoteToEdit.subject%>" 
+          <% } else { %> 
+            placeholder="No subject currently listed" 
+          <% } %> 
+        />
+      </div>
+      <div>
+        <label for="source"><p>Source</p></label>
+        <input
+          type="text"
+          id="source"
+          name="quote[source]"
+          <% if (quoteToEdit.source) { %>
+          value="<%= quoteToEdit.source %>" 
+          <% } else { %> 
+            placeholder="No source currently listed" 
+            <% } %> 
+        />
+      </div>
+      <div>
+        <label for="sourceDetails"><p>Source Details</p></label>
+        <input type="text" id="sourceDetails" name="quote[sourceDetails]" 
+        <% if (quoteToEdit.sourceDetails) { %>
+          value="<%= quoteToEdit.sourceDetails %>" 
+        <% } else { %>
+          placeholder="No source details currently listed" 
+        <% } %>  
+        />
+      </div>
+      <div>
+        <label for="year"><p>Year</p></label>
+        <input type="text" id="year" name="quote[year]" 
+        <% if (quoteToEdit.year) { %>
+          value="<%= quoteToEdit.year %>" 
+        <% } else { %>
+          placeholder="No year currently listed" 
+        <% } %>  
+        />
+      </div>
+      <button>Update Quote</button>
+    </form>
+  </body>
+</html>
