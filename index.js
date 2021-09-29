@@ -4,6 +4,9 @@ const { Mongoose } = require('mongoose');
 const app = express();
 const path = require('path');
 const methodOverride = require('method-override');
+const ejsMate = require('ejs-mate');
+
+app.engine('ejs', ejsMate)
 
 // Models
 const Quote = require('./models/quote');

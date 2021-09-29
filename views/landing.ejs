@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome to the Memorizer</title>
-  </head>
-  <body>
+<% layout('../partials/boilerplate.ejs') %>
     <h1>Welcome to the Memorizer</h1>
     <h2>Today's Random Quote</h2>
     <a href="/quotes/<%=qotd._id%>">
@@ -16,5 +8,3 @@
     <a href="#">Fill in the Blanks</a>
     <a href="#">Who Said It?</a>
     <a href="/quotes">Manage Quotes</a>
-  </body>
-</html>

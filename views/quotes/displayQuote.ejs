@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quote Details</title>
-  </head>
-  <body>
+<% layout('../partials/boilerplate.ejs') %>
     <h1>Detailed view</h1>
     <p>Quote Text: <%= quoteToDisplay.text %></p>
     <p>Author/Speaker: <%= quoteToDisplay.author %></p>
@@ -23,9 +15,7 @@
     <% if (quoteToDisplay.updatedAt) { %>
     <p>Quote last updated on <%= quoteToDisplay.updatedAt %>.</p>
     <% } %>
-    <a href="/quotes/<%=quoteToDisplay._id%>/edit">Edit this Quote</a>
+    <a type="button" class="button" href="/quotes/<%=quoteToDisplay._id%>/edit">Edit this Quote</a>
     <form action="/quotes/<%=quoteToDisplay._id%>?_method=DELETE" method="POST">
-      <button>Delete Quote</button>
+      <button type="submit" class="button">Delete Quote</button>
     </form>
-  </body>
-</html>
