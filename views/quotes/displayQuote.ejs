@@ -2,8 +2,11 @@
     <h1>Detailed view</h1>
     <p>Quote Text: <%= quoteToDisplay.text %></p>
     <p>Author/Speaker: <%= quoteToDisplay.author %></p>
-    <% if (quoteToDisplay.subject) { %>
-    <p>Subject: <%= quoteToDisplay.subject %></p>
+    <% if (quoteToDisplay.tags.length > 0) { %>
+      <p>Tags: </p>
+      <% for (let tag of quoteToDisplay.tags) { %>
+        <a class="button small" type="button"><%= tag %></a>
+      <% } %>
     <% } %> <% if (quoteToDisplay.source) { %>
     <p>Source: <%= quoteToDisplay.source %></p>
     <% } %> <% if (quoteToDisplay.sourceDetails) { %>
@@ -15,7 +18,9 @@
     <% if (quoteToDisplay.updatedAt) { %>
     <p>Quote last updated on <%= quoteToDisplay.updatedAt %>.</p>
     <% } %>
-    <a type="button" class="button" href="/quotes/<%=quoteToDisplay._id%>/edit">Edit this Quote</a>
-    <form action="/quotes/<%=quoteToDisplay._id%>?_method=DELETE" method="POST">
-      <button type="submit" class="button">Delete Quote</button>
-    </form>
+    <span>
+      <a type="button" class="button" href="/quotes/<%=quoteToDisplay._id%>/edit">Edit this Quote</a>
+      <form action="/quotes/<%=quoteToDisplay._id%>?_method=DELETE" method="POST">
+        <button type="submit" class="button">Delete Quote</button>
+      </form>
+    </span>

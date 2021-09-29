@@ -54,6 +54,7 @@ app.get('/quotes/newQuote', (req, res) => {
 // Create new quote (post)
 app.post('/quotes', async (req, res) => {
     const newQuote = new Quote(req.body.quote);
+    newQuote.tags = newQuote.tags[0].split(',');
     await newQuote.save();
     console.log("Quote submitted:", newQuote)
     res.redirect('/quotes')
@@ -78,7 +79,10 @@ app.get('/quotes/:id/edit', async (req, res) => {
 // Edit quote (put)
 app.put('/quotes/:id', async (req, res) => {
     const {id} = req.params;
+    // const {tags} = req.body.quote.tags
     const quoteToUpdate = await Quote.findByIdAndUpdate(id, { ...req.body.quote, new: true });
+    // console.log("posted array", req.body.quote.tags)
+    quoteToUpdate.tags = req.body.quote.tags.split(',');
     await quoteToUpdate.save();
     res.redirect(`/quotes/${quoteToUpdate._id}`)
 })

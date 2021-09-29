@@ -17,15 +17,15 @@
         />
       </div>
       <div>
-        <label for="subject"><p>Subject</p></label>
+        <label for="tags"><p>Tags</p></label>
         <input
           type="text"
-          id="subject"
-          name="quote[subject]"
-          <% if (quoteToEdit.subject) { %>
-            value="<%=quoteToEdit.subject%>" 
+          id="tags"
+          name="quote[tags]"
+          <% if (quoteToEdit.tags) { %>
+            value="<%=quoteToEdit.tags%>" 
           <% } else { %> 
-            placeholder="No subject currently listed" 
+            placeholder="No tags currently listed" 
           <% } %> 
         />
       </div>

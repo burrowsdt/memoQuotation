@@ -9,8 +9,8 @@ const quoteSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    subject: {
-        type: String
+    tags: {
+        type: Array
     },
     source: {
         type: String
