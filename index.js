@@ -40,6 +40,8 @@ app.get('/', async (req, res) => {
     res.render('landing', { qotd })
 })
 
+///// Quotes routes
+
 // See all (manage) quotes
 app.get('/quotes', async (req, res) => {
     const quotesArray = await Quote.find({})
@@ -54,7 +56,7 @@ app.get('/quotes/newQuote', (req, res) => {
 // Create new quote (post)
 app.post('/quotes', async (req, res) => {
     const newQuote = new Quote(req.body.quote);
-    newQuote.tags = newQuote.tags[0].split(',');
+    newQuote.tags = newQuote.tags[0].split(',').map((el) => el.trim());
     await newQuote.save();
     console.log("Quote submitted:", newQuote)
     res.redirect('/quotes')
@@ -66,6 +68,14 @@ app.get('/quotes/:id', async (req, res) => {
     const quoteToDisplay = await Quote.findById(id);
     console.log(quoteToDisplay)
     res.render('quotes/displayQuote', { quoteToDisplay })
+})
+
+// Show page for a specific tag
+app.get('/tags/:tag', async (req, res) => {
+    const { tag } = req.params;
+    const quotesToDisplay = await Quote.find({ tags: { $regex: tag, $options: 'i' }});
+    console.log(quotesToDisplay)
+    res.render('tags/listTags', { quotesToDisplay })
 })
 
 // Edit quote (render form)
@@ -82,7 +92,7 @@ app.put('/quotes/:id', async (req, res) => {
     // const {tags} = req.body.quote.tags
     const quoteToUpdate = await Quote.findByIdAndUpdate(id, { ...req.body.quote, new: true });
     // console.log("posted array", req.body.quote.tags)
-    quoteToUpdate.tags = req.body.quote.tags.split(',');
+    quoteToUpdate.tags = req.body.quote.tags.split(',').map((el) => el.trim());
     await quoteToUpdate.save();
     res.redirect(`/quotes/${quoteToUpdate._id}`)
 })

@@ -1,5 +1,10 @@
 const mongoose = require('mongoose');
 
+// Normalization functions
+function toLower(v) {
+    return v.toLowerCase();
+  }
+
 const quoteSchema = new mongoose.Schema({
     text: {
         type: String,

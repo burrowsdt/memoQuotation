@@ -1,0 +1,16 @@
+<% layout('../partials/boilerplate.ejs') %>
+<h1>Quotes that match</h1>
+
+<% for (let quote of quotesToDisplay) { %>
+    <div>
+        <h3><%= quote.text %></h3>
+        <h4><%= quote.author %></h4>
+        <% if (quote.tags.length > 0) { %>
+            <p>Tags: </p>
+            <% for (let tag of quote.tags) { %>
+              <a href="/tags/<%=tag%>" class="button small" type="button"><%= tag %></a>
+            <% } %>
+          <% } %>
+    </div>
+    <hr />
+    <% } %>
