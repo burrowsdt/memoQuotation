@@ -1,0 +1,5 @@
+<% layout('../partials/boilerplate.ejs') %>
+<h1>All Tags</h1>
+<% for (let tag of allTags){ %>
+    <a href="/tags/<%=tag%>" class="button small" type="button"><%= tag %></a>
+<% } %> 

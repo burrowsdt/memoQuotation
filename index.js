@@ -45,12 +45,12 @@ app.get('/', async (req, res) => {
 // See all (manage) quotes
 app.get('/quotes', async (req, res) => {
     const quotesArray = await Quote.find({})
-    res.render('index', { quotesArray })
+    res.render('quotes/index', { quotesArray })
 })
 
 // Create new quote (render form)
 app.get('/quotes/newQuote', (req, res) => {
-    res.render('new')
+    res.render('quotes/new')
 })
 
 // Create new quote (post)
@@ -70,20 +70,12 @@ app.get('/quotes/:id', async (req, res) => {
     res.render('quotes/displayQuote', { quoteToDisplay })
 })
 
-// Show page for a specific tag
-app.get('/tags/:tag', async (req, res) => {
-    const { tag } = req.params;
-    const quotesToDisplay = await Quote.find({ tags: { $regex: tag, $options: 'i' }});
-    console.log(quotesToDisplay)
-    res.render('tags/listTags', { quotesToDisplay })
-})
-
 // Edit quote (render form)
 
 app.get('/quotes/:id/edit', async (req, res) => {
     const { id } = req.params;
     const quoteToEdit = await Quote.findById(id);
-    res.render('edit', { quoteToEdit })
+    res.render('quotes/edit', { quoteToEdit })
 })
 
 // Edit quote (put)
@@ -102,4 +94,20 @@ app.delete('/quotes/:id', async (req, res) => {
     const {id} = req.params;
     await Quote.findByIdAndDelete(id);
     res.redirect('/quotes')
+})
+
+///// Tags routes
+
+// See all tags
+app.get('/tags', async (req, res) => {
+    const allTags = await Quote.distinct('tags');
+    res.render('tags/index.ejs', { allTags })
+})
+
+// Show page for a specific tag
+app.get('/tags/:tag', async (req, res) => {
+    const { tag } = req.params;
+    const quotesToDisplay = await Quote.find({ tags: { $regex: tag, $options: 'i' }});
+    console.log(quotesToDisplay)
+    res.render('tags/listTags', { quotesToDisplay })
 })
